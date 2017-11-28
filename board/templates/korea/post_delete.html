@@ -1,0 +1,49 @@
+{% extends 'Travel_Comm/base.html' %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="row">
+            <div class="col-sm-11 col-md-11">
+                <div class="panel panel-default">
+                    <div class="panel-body mainbody" style="height:auto;">
+
+                        <div style="text-align: center;">
+                            <form action="" method="post">{% csrf_token %}
+                                <p style="font-size: 20px; color: red;"> "{{ post.title }}" 진짜 지우꼬양? ㅠ3ㅠ ?</p>
+                                <input type="submit" value="삭제" />
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+    
+
+                    <div class="col-sm-4 col-md-4">
+                        <span class="label label-default">데일리 평점순</span>
+                        <div class="thumbnail" style="height:200px;">
+                            <div class="caption">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <span class="label label-default">데일리 추천순</span>
+                        <div class="thumbnail" style="height:200px;">
+                            <div class="caption">
+                                <p>데일리 추천순</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <span class="label label-default">데일리 댓글순</span>
+                        <div class="thumbnail" style="height:200px;">
+                            <div class="caption">
+                                <p>데일리 댓글순</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}

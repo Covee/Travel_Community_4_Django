@@ -1,0 +1,66 @@
+{% extends 'Travel_Comm/base.html' %}
+
+{% block content %}
+
+    <h1 style="color: black;">글쓰기 - {{ user }}</h1>
+        
+
+
+        <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            {% if form.errors %}
+                <p class="errornote">뭔가가 틀렸당</p>
+            {% endif %}
+
+            <div class="form-group">
+                <p style="color: black;">새로운 POST를 작성 해 주세용~</p>
+
+                <fieldset class="aligned" style="color: black;" >
+                        {{ form.title.label_tag }} {{ form.title }}
+                    
+                    <div class="form-row">
+                        {{ form.country.label_tag }} {{ form.country }}    
+                    </div>
+                    <div class="form-row">
+                        {{ form.content.label_tag }} {{ form.content }}    
+                    </div>
+                    <div class="form-row">
+                        {{ form.image.label_tag }} {{ form.image }}    
+                    </div>
+                </fieldset>
+                
+                    <div class="submit-row">
+                        <input type="submit" value="작성">
+                    </div>
+                    <script type="text/javascript">document.getElementById('id_title').focus();</script>
+                </div>
+        </form>
+
+
+
+                    <div class="col-sm-4 col-md-4">
+                        <span class="label label-default">데일리 평점순</span>
+                        <div class="thumbnail" style="height:200px;">
+                            <div class="caption">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <span class="label label-default">데일리 추천순</span>
+                        <div class="thumbnail" style="height:200px;">
+                            <div class="caption">
+                                <p>데일리 추천순</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <span class="label label-default">데일리 댓글순</span>
+                        <div class="thumbnail" style="height:200px;">
+                            <div class="caption">
+                                <p>데일리 댓글순</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+{% endblock %}

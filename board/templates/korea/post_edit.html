@@ -1,0 +1,57 @@
+{% extends 'Travel_Comm/base.html' %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="row">
+
+            <div class="col-sm-11 col-md-11">
+                <div class="panel panel-default">
+                    <div class="panel-body mainbody" style="height:auto;">
+                        
+                        <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                            {{ form.as_p }}
+                            <input type="submit" value="수정" />
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-13 col-md-13">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            가로 광고
+                        </div>
+                    </div>
+                </div>
+
+
+
+    <div class="col-sm-4 col-md-4">
+        <span class="label label-default">데일리 평점순</span>
+        <div class="thumbnail" style="height:200px;">
+            <div class="caption">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 col-md-4">
+        <span class="label label-default">데일리 추천순</span>
+        <div class="thumbnail" style="height:200px;">
+            <div class="caption">
+                <p>데일리 추천순</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 col-md-4">
+        <span class="label label-default">데일리 댓글순</span>
+        <div class="thumbnail" style="height:200px;">
+            <div class="caption">
+                <p>데일리 댓글순</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

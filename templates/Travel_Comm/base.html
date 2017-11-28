@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <style>
+    </style>
+    <title>리얼 여행 커뮤니티</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="page-header">
+            <h1 style="font-size: 45px;" ><a href="{% url 'home' %}" style=text-decoration:none>리얼 여행 커뮤니티 </a>
+            <small>한 방에 해결하는 여행 준비!</small>
+                {% load socialaccount %}
+
+                {% if user.is_authenticated %}
+                    <div align="right" style="font-size: 18px;"><span>{{ user }}님이 로그인중입니다.</span><p></p>
+                    <p style="font-size: 18px;"><a href={% url 'logout' %}>로그아웃</a>&ensp;</p>
+                    <p style="font-size: 18px;"><a href={% url 'update' %}>회원정보 변경</a>&ensp;</p>
+                    </div>
+
+                    {% for account in user.socialaccount_set.all %}
+                        {% comment %} show avatar from url {% endcomment %}
+                        <h3 style="text-transform:capitalize;">{{ account.provider }} 로그인 성공 >3<</h3>
+                        <img width="100" height="100" src="{{ account.get_avatar_url }}"/>
+                        <small>UID: <a href="{{ account.extra_data.link }}">{{ account.uid }}</a></small>
+                        <small>Username: {{ account.extra_data.username }}</small>
+                        <small>First Name: {{ account.extra_data.first_name }}</small>
+                        <small>Last Name: {{ account.extra_data.last_name }}</small>
+                        <small>Dashboard Link:
+                            <a href="{{ account.extra_data.link }}">{{ account.extra_data.link }}</a></small>
+                    {% empty %}
+                        <p align="right" style="font-size: 18px;">you have no Social Accounts saved in this site</p>
+                    {% endfor %}
+                {% else %}
+                    <p align="right">
+                    <span style="font-size: 22px;"><a href="/accounts/login">로그인</a>&ensp;</span>
+                    <span style="font-size: 20px;"><a href="{% provider_login_url "naver" %}"><img src="/static/naver.jpg" width="40" height="40"></a>&ensp;</span>
+                    <span style="font-size: 20px;"><a href="{% provider_login_url 'facebook' method='oauth2' %}"><img src="/static/FB.png" width="40" height="40"></a>&ensp;</span> 
+                    <span style="font-size: 20px;"><a href="{% provider_login_url "kakao" %}"><img src="/static/kakao.png" width="40" height="40"></a>&ensp;</span>
+                    
+                    <span style="font-size: 22px;"><a href="/accounts/signup">회원가입</a>&ensp;</span>
+                    </p>
+                {% endif %}
+
+                {% if user.is_active %}
+                    {#        <h4><a href="{% url 'logout' %}"#}
+                    {#        style="float: right; margin:0px 30px 0px 0px; font-size: 22px;"><strong>로그아웃#}
+                    {#        / {% firstof user.get_short_name user.get_username %}</strong></a>#}
+                    {#         </h4>#}
+                {% else %}
+                {% endif %}
+
+            </h1>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li role="presentation" class="active" style='width:130px; text-align:center; margin: 5px 5px 20px 5px' ;><a href="{% url 'korea' %}" style="font-size: 18px;">한국</a></li>
+            <li role="presentation"><a href="#" style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>동남아</a>
+            </li>
+            <li role="presentation"><a href="#" style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>유럽</a>
+            </li>
+            <li role="presentation"><a href="#" style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>북미</a>
+            </li>
+            <li role="presentation"><a href="#" style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>남미</a>
+            </li>
+            <li role="presentation"><a href="#" style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>호주</a>
+            </li>
+            <li role="presentation"><a href="#"
+                                       style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>아프리카</a></li>
+            <li role="presentation"><a href="#"
+                                       style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>자유게시판</a></li>
+        </ul>
+    </div>
+
+    <a href="{% url 'post_add' %}" style="font-size: 15px; color: white;"><button type="button" class="btn btn-info">글쓰기</button></a>
+    
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="col-sm-1 col-md-1">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <span class="label label-default">세로광고</span>
+                <div class="panel panel-default">
+                    <div class="panel-body" style="height:638px;font-size:15px;">
+                        <a href="https://adcr.naver.com/adcr?x=Rqa4C99W3/EjVmlNQUakH////w==kRMpImpWbl83DAAldDhL1m45/qd+4QwC5D293mGclupM8jUy2/Cs8z6+KlWDlS0PAIawRYHU+cNg0+Txd8YIXbT39xbsgs/8STEs3MM1cahxcZd2gCVPaUeQyreB42At95WVS4f9Ef0HueOCwhn8XVz8mUasmDBr9x8cI/8ZWuaXHIwt8nmAJGj4tMCSI4RnEObSzemQEWC01CwEUuePNYRaLfRT9mn5rLr/1ohW8/hVN1KLrHPuRMw9IQQyftwRhy61OIT00niHSkZiz3PrQg9J+dUfVAAd13YL114CBi2FxEumAxTGIB6xe1cHwv6158esBC0PR7y2+/uE5CYuNZApjiBVOnbGolRI5bX86dEOILQdqY6jzEdflP+gc4ANSrRfPclzGm7gdxFSPEiwhz9Fy33bsWOJck+VcFoulkjJY/UzfyOSpAkDTjcxqPoF6fV6w2MIOkOiEP7RFh0c32UzbW52m8vKGzFcsJMJ3dDJJyQ/Y/uPwpJL1S70QMBAvJb4VOkFT1O4zgY1g6ohkeNDkh6b5EyQvk1vQTUKCPXhZpaKLX3D1iawwCXVdw/xwZOi7vTZe2+zYa5HBt9Ct0RPyHcxlGLkv1T1W45WPArjtxaTv/6L0OkRYfr/mgsSjiM2sZ85RiMW1sLdKmIpBKpUylSPGzAmxo0QVQ4STBYNT/JW0RcchESQ2K6gJanhqTinv794pIoblVAJFIXuAa1MmNM8abvKiR3mKy6z0q+PZqFeAB7/CR++zzoa/N3dS+0x75PISUkqQBU3DrnYN1iHmKTA8+wb34Q/qJAhLw03Wf5EfcCB5+9/GUOKBqHTEFMF9VkUYRnSUJarX9YfxuJMpuZzrX3KWhH16McnGflmReI/1nO3/1On2GBYl60hKSXc6FstT6+cdb5qY/qUk1kUBsG+TNWYQaHbsowbyNdyI+hwVEPZdr3p07q80q/wV"
+                           target="_blank" class="title">게임클릭에 오신걸 환영합니다</a>
+
+                        <p>
+                        <p>가로 늘리고, 세로 길이 자동 조절되게끔 설정 필요할듯</p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-12">
+        <span class="label label-default">제휴</span>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                제휴사이트 / 여행 관련 링크
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6">
+        <span class="label label-default">가로 광고</span>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                가로 광고 연결
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6">
+        <span class="label label-default">가로 광고</span>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                가로 광고 연결
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+
+</html>

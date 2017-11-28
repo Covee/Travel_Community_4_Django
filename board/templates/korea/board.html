@@ -1,0 +1,71 @@
+{% extends 'Travel_Comm/base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="row">
+                <div class="col-sm-11 col-md-11">
+                    {# need bootstrap for pagination 페이징 #}
+                    {% load el_pagination_tags %}
+                    {% paginate post_list %}{% get_pages %}
+                    {% for post in post_list %}
+                    
+
+                        <div class="col-sm-4 col-md-4">
+                            <span class="label label-default" style="font-size: 14px;">
+                            {{ post.country }}</span>
+                            <div class="thumbnail" id='test' onclick=
+                                    "location.href='{% url 'post_detail' post.id %}'"
+                                 style="height:230px; cursor:pointer" ;>
+                                <div style="height:180px; padding:auto;">
+                                    {% if post.image %}
+                                        <img src="{{ post.image.url }}" style="height: 100%" ; width="100%" alt="">
+                                    {% endif %}
+                                </div>
+
+                                <div class="caption">
+                                    <h5>
+                                        <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>&nbsp;[{{ post.comments.count }}]<p>
+                                        {{ post.modify_date|date:"Y, m, d" }}
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;작성자: {{ post.user }}</p>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    <p style="font-size: 20px;" align="center">
+                        {{ pages }} &nbsp;&nbsp;&nbsp;
+                        {{ pages.current_start_index }} -
+                        {{ pages.current_end_index }} of
+                        {{ pages.total_count }}
+                    </p>
+
+
+                    <div class="col-sm-4 col-md-4">
+                        <span class="label label-default">데일리 평점순</span>
+                        <div class="thumbnail" style="height:200px;">
+                            <div class="caption">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <span class="label label-default">데일리 추천순</span>
+                        <div class="thumbnail" style="height:200px;">
+                            <div class="caption">
+                                <p>데일리 추천순</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <span class="label label-default">데일리 댓글순</span>
+                        <div class="thumbnail" style="height:200px;">
+                            <div class="caption">
+                                <p>데일리 댓글순</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
